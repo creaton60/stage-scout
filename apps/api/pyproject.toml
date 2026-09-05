@@ -1,0 +1,54 @@
+[project]
+name = "stage-scout"
+version = "0.1.0"
+description = "Naver Map 데이터와 현장 사진 기반 공연 장소 선정 및 무대·관객 배치 설계 시스템"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "httpx>=0.27",
+    "shapely>=2.0",
+    "pyproj>=3.7",
+    "astral>=3.2",
+    "pillow>=11.0",
+    "sqlalchemy>=2.0",
+    "geoalchemy2>=0.15",
+    "psycopg[binary]>=3.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "respx>=0.21",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stage_scout"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "TID"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+# 의존 규칙을 린터로도 못박는다.
+"stage_scout.adapter".msg = "domain/application 에서 adapter 를 import 할 수 없다 (헥사고날 의존 규칙)"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

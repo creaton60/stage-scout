@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# 환경 / 시크릿
+.env
+.env.*
+!.env.example
+
+# 업로드된 현장 사진 (로컬 개발용)
+apps/api/var/photos/
+
+# OS / 에디터
+.DS_Store
+.idea/
+.vscode/
